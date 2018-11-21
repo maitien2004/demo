@@ -19,11 +19,12 @@ if(env.BRANCH_NAME == null) {
 			stageName = 'staging'
 			break
 		case 'develop':
-		default:
 			stageName = env.STAGE ? env.STAGE : 'development'
 			break
 	}
 }
+
+if(!stageName) return
 
 node {
 	stage('Demo'){
