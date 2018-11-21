@@ -24,17 +24,9 @@ if(env.BRANCH_NAME == null) {
 	}
 }
 
-node('master') {
+node {
 	stage('Demo'){
         sh 'echo master'
-		sh 'echo ' + env.BRANCH_NAME
-		sh 'echo ' + stageName
-    }
-}
-
-node('develop') {
-	stage('Demo'){
-        sh 'echo develop'
 		sh 'echo ' + env.BRANCH_NAME
 		sh 'echo ' + stageName
     }
