@@ -8,21 +8,6 @@ properties(projectProperties)
 
 def stageName
 
-if(env.BRANCH_NAME == null) {
-	stageName = env.STAGE
-} else {
-	switch (env.BRANCH_NAME) {	
-		case 'production':
-			stageName = 'production'
-			break
-		case 'master':
-			stageName = 'staging'
-			break
-		case 'develop':
-			stageName = env.STAGE ? env.STAGE : 'development'
-			break
-	}
-}
 
 if(!stageName) return
 
@@ -30,6 +15,6 @@ node {
 	stage('Demo'){
         sh 'echo master'
 		sh 'echo ' + env.BRANCH_NAME
-		sh 'echo ' + stage
+		sh 'echo ' + stageName
     }
 }
