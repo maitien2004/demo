@@ -10,15 +10,15 @@ switch (branch) {
 	case 'production':
 		stage = 'production'
 		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break;
+		break
 	case 'master':
 		stage = 'staging'
 		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break;
+		break
 	case 'develop':
-		stage = 'development'
+		stage = stage ? stage : 'development'
 		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break;
+		break
 }
 
 properties(projectProperties)
