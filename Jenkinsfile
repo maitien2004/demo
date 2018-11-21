@@ -1,4 +1,4 @@
-properties([pipelineTriggers([pollSCM('H/5 * * * *')]])])
+properties([pipelineTriggers([pollSCM('H/5 * * * *')])])
 
 node {
 	stage('Demo'){
