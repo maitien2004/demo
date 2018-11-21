@@ -1,33 +1,33 @@
 /* Only keep the 10 most recent builds. */
 def projectProperties = [
     [$class: 'BuildDiscarderProperty',strategy: [$class: 'LogRotator', numToKeepStr: '10']],
+	pipelineTriggers([pollSCM('H/15 * * * *')])
 ]
 
-def branchName = env.BRANCH_NAME.toLowerCase()
-def stageName = env.STAGE
-
-switch (branchName) {	
-	case 'production':
-		stageName = 'production'
-		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break
-	case 'master':
-		stageName = 'staging'
-		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break
-	case 'develop':
-		stageName = stageName ? stageName : 'development'
-		projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-		break
-}
-
 properties(projectProperties)
+
+def stageName
+
+if(env.BRANCH_NAME == null) {
+	stageName = env.STAGE
+} else {
+	switch (env.BRANCH_NAME) {	
+		case 'production':
+			stageName = 'production'
+			break
+		case 'master':
+			stageName = 'staging'
+			break
+		case 'develop':
+			stageName = env.STAGE ? env.STAGE : 'development'
+			break
+	}
+}
 
 node {
 	stage('Demo'){
         sh 'echo master'
-		sh 'echo ' + branchName
+		sh 'echo ' + env.BRANCH_NAME
 		sh 'echo ' + stageName
-		sh 'echo ' + env.CHANGE_ID
     }
 }
