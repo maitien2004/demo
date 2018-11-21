@@ -3,6 +3,10 @@ def projectProperties = [
     [$class: 'BuildDiscarderProperty',strategy: [$class: 'LogRotator', numToKeepStr: '10']],
 ]
 
+def branch = env.BRANCH_NAME.toLowerCase()
+def stage = env.STAGE
+
+
 
 properties(projectProperties)
 
