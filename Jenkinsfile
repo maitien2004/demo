@@ -28,6 +28,5 @@ node {
         sh 'echo master'
 		sh 'echo ' + branch
 		sh 'echo ' + stage
-		sh 'echo ' + env.CHANGE_ID
     }
 }
