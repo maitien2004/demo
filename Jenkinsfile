@@ -6,20 +6,21 @@ def projectProperties = [
 
 properties(projectProperties)
 
-def stage
+def stageName
 
 if(env.BRANCH_NAME == null) {
-	stage = env.STAGE
+	stageName = env.STAGE
 } else {
 	switch (env.BRANCH_NAME) {	
 		case 'production':
-			stage = 'production'
+			stageName = 'production'
 			break
 		case 'master':
-			stage = 'staging'
+			stageName = 'staging'
 			break
 		case 'develop':
-			stage = env.STAGE ? env.STAGE : 'development'
+		default:
+			stageName = env.STAGE ? env.STAGE : 'development'
 			break
 	}
 }
