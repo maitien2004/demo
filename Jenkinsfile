@@ -3,8 +3,8 @@ def projectProperties = [
     [$class: 'BuildDiscarderProperty',strategy: [$class: 'LogRotator', numToKeepStr: '10']],
 ]
 
-def branch = env.BRANCH_NAME
-def stage = env.STAGE
+def Branch = env.BRANCH_NAME
+def Stage = env.STAGE
 
 
 properties(projectProperties)
@@ -12,8 +12,8 @@ properties(projectProperties)
 node {
 	stage('Demo'){
         sh 'echo master'
-		sh 'echo ' + branch
-		sh 'echo ' + stage
+		sh 'echo ' + Branch
+		sh 'echo ' + Stage
 		sh 'echo ' + env.CHANGE_ID
     }
 }
