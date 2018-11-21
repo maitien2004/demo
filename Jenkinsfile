@@ -6,10 +6,10 @@ def projectProperties = [
 def branch = env.BRANCH_NAME
 def stage = env.STAGE
 
-if(branch.toLowerCase() == 'production') {
+if(branch == 'production') {
 	stage = 'production'
 	projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
-} else if(branch.toLowerCase() == 'master') {
+} else if(branch == 'master') {
 	stage = 'staging'
 	projectProperties.add(pipelineTriggers([pollSCM('H/15 * * * *')]))
 } else {
