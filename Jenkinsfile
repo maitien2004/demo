@@ -24,18 +24,19 @@ if(env.BRANCH_NAME == null) {
 	}
 }
 
-if(!stageName) {
+if(stageName) {
 	node {
 		stage('Error'){
 			echo 'stage is not defined'
 		}
 	}
-} else {
-	node {
-		stage('Demo'){
-			sh 'echo master'
-			sh 'echo ' + env.BRANCH_NAME
-			sh 'echo ' + stageName
-		}
+	return 
+}
+
+node {
+	stage('Demo'){
+		sh 'echo master'
+		sh 'echo ' + env.BRANCH_NAME
+		sh 'echo ' + stageName
 	}
 }
