@@ -1,3 +1,5 @@
+properties([pipelineTriggers([cron('H/5 * * * *')])])
+
 node {
 	stage('Demo'){
         sh 'echo develop'
