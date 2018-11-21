@@ -24,7 +24,7 @@ if(env.BRANCH_NAME == null) {
 	}
 }
 
-if(!stageName) {
+if(stageName) {
 	node {
 		stage('Error'){
 			echo 'stage is not defined'
